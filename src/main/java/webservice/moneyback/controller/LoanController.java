@@ -1,5 +1,6 @@
 package webservice.moneyback.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,27 @@ public class LoanController {
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
 	}
+	
+	@PutMapping("/addloan")
+	public ResponseEntity addLoan(@RequestBody List<User> listuser, 
+								  @RequestBody String amount,
+								  @RequestBody String fromWho,
+								  @RequestBody String description){
+		
+		int wholeAmount = Integer.parseInt(amount);
+		Date date = new Date();
+		int amountPerPerson = wholeAmount/listuser.size();
+				
+		for(User usr: listuser) {
+			Loan tempLoan = new Loan(-1,fromWho,usr.getName(),amountPerPerson,date,description);
+			loanService.save(tempLoan);
+		}
+		
+		return new ResponseEntity(HttpStatus.OK);
+		
+	}
+	
+	
 
 	
 	

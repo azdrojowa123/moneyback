@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import webservice.moneyback.entity.Loan;
+import webservice.moneyback.entity.NewLoanInfo;
 import webservice.moneyback.entity.User;
 import webservice.moneyback.service.LoanService;
 
@@ -62,7 +65,7 @@ public class LoanController {
 	}
 	
 	@GetMapping("/users")
-	public List getUsers(){
+	public List<User> getUsers(){
 		return loanService.getUsers();
 	}
 	
@@ -74,28 +77,20 @@ public class LoanController {
 		
 	}
 	
-	@PutMapping("/addloan")
-	public ResponseEntity addLoan(@RequestBody List<User> listuser, 
-								  @RequestBody String amount,
-								  @RequestBody String fromWho,
-								  @RequestBody String description){
+	@PostMapping("/addloan")
+	public ResponseEntity<NewLoanInfo> addLoan(@RequestBody NewLoanInfo loanInfo){
 		
-		int wholeAmount = Integer.parseInt(amount);
+		int wholeAmount = Integer.parseInt(loanInfo.getAmount());
 		Date date = new Date();
-		int amountPerPerson = wholeAmount/listuser.size();
+		int amountPerPerson = wholeAmount/loanInfo.getListuser().size();
 				
-		for(User usr: listuser) {
-			Loan tempLoan = new Loan(-1,fromWho,usr.getName(),amountPerPerson,date,description);
+		for(User usr: loanInfo.getListuser()) {
+			Loan tempLoan = new Loan(33,loanInfo.getFromWho(),usr.getName(),amountPerPerson,date,loanInfo.getDescription());
 			loanService.save(tempLoan);
 		}
 		
-		return new ResponseEntity(HttpStatus.OK);
+		
+		return new ResponseEntity<NewLoanInfo>(loanInfo,HttpStatus.OK);
 		
 	}
-	
-	
-
-	
-	
-	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import webservice.moneyback.aspects.GetRequest;
 import webservice.moneyback.dao.LoanRepository;
 import webservice.moneyback.dao.UserRepository;
 import webservice.moneyback.entity.Loan;
@@ -50,14 +51,16 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
+	@GetRequest
 	public Loan findById(int id) {
 		return loanRepository.findById(id);
 	}
 
 	@Override
+	@GetRequest
 	@Cacheable(cacheNames="getUsers")
 	public List getUsers() {
-		return userRepository.findAll();
+	return userRepository.findAll();
 	}
 
 	@Override

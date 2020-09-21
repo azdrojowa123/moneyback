@@ -3,6 +3,8 @@ package webservice.moneyback;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -36,7 +38,9 @@ public class SwaggerConfig {
             					"website here",
                                 "a.zdrojowa@gmail.com"))
             .build();
-}
+    }
+    
+
     
 
 

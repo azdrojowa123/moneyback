@@ -16,7 +16,7 @@ public class Loan {
 	public Loan() {}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
@@ -92,6 +92,16 @@ public class Loan {
 	public Loan(int id, String fromwho, String forwho, int amount, Date targetDate, String description) {
 		super();
 		this.id = id;
+		this.fromwho = fromwho;
+		this.forwho = forwho;
+		this.amount = amount;
+		this.targetDate = targetDate;
+		this.description = description;
+	}
+	
+	public Loan( String fromwho, String forwho, int amount, Date targetDate, String description) {
+		super();
+		
 		this.fromwho = fromwho;
 		this.forwho = forwho;
 		this.amount = amount;

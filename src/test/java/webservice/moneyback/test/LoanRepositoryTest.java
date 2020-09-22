@@ -6,22 +6,22 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import junit.framework.Assert;
 import webservice.moneyback.dao.LoanRepository;
 import webservice.moneyback.entity.Loan;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureDataJpa
-@Transactional
+@DataJpaTest
 public class LoanRepositoryTest {
 		
+	@Autowired
+	private TestEntityManager em;
 	
 	@Autowired
 	private LoanRepository loanRepo;
@@ -30,15 +30,13 @@ public class LoanRepositoryTest {
 	public void findByPerson_method_test() {
 
 		
-		Loan l1 = new Loan(1,"Kasia","Marek",23,new Date(),"description21");
-		//entityManager.persist(l1);
-		//entityManager.flush();
-		loanRepo.save(l1);
+		Loan l1 = new Loan("Kasia","Marek",23,new Date(),"nothing");
+		em.detach(l1);
+		em.persist(l1);
+		em.flush();
 		
-		Loan testLoan = loanRepo.findById(2);
-		/*
-		assertThat(testLoan.getForwho())
-		.isEqualTo(l1.getForwho());*/
+		Loan testLoan = loanRepo.findById(1);
+		
 		
 		Assert.assertEquals(testLoan.getForwho(), "Mania");
 	}

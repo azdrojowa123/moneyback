@@ -31,14 +31,14 @@ public class LoanRepositoryTest {
 
 		
 		Loan l1 = new Loan("Kasia","Marek",23,new Date(),"nothing");
-		em.detach(l1);
 		em.persist(l1);
 		em.flush();
 		
-		Loan testLoan = loanRepo.findById(1);
+		String expected = l1.getForwho();
+		String result = loanRepo.findById(1).getForwho();
 		
 		
-		Assert.assertEquals(testLoan.getForwho(), "Mania");
+		Assert.assertEquals(expected, result);
 	}
 
 	

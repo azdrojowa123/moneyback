@@ -14,7 +14,7 @@ import webservice.moneyback.entity.Loan;
 @Repository
 public interface LoanRepository extends JpaRepository < Loan, Integer > {
 
-	List findAll();
+	public List findAll();
 	
 	@Query("SELECT b FROM Loan b WHERE b.fromwho=:username or b.forwho=:username")
 	List findByPerson(@Param("username") String username);

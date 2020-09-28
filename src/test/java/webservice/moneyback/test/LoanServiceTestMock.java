@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,9 +32,12 @@ class LoanServiceTestMock {
 	@Test
 	void findByPerson_test() {
 		
-		when(repo.findByPerson("Kamil")).thenReturn(
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		when(repo.findByPerson(captor.capture())).thenReturn(
 				Arrays.asList(new Loan(1,"Ola","Kamil",130,new Date(),"description")
 				));
+		
 				
 		List<Loan> result = service.findByPerson("Kamil");
 		

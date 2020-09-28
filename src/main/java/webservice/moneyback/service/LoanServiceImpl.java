@@ -19,14 +19,12 @@ import webservice.moneyback.entity.User;
 @Component
 public class LoanServiceImpl implements LoanService {
 
+	@Autowired
 	private LoanRepository loanRepository;
-	private UserRepository userRepository;
 	
 	@Autowired
-	public LoanServiceImpl(LoanRepository theLoanRepository, UserRepository theUserRepository) {
-		loanRepository = theLoanRepository;
-		userRepository = theUserRepository;
-	}
+	private UserRepository userRepository;
+	
 	
 	@Override
 	 public List findAll() {

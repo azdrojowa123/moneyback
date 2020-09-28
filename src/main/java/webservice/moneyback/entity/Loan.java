@@ -99,22 +99,5 @@ public class Loan {
 		this.description = description;
 	}
 	
-	public Loan( String fromwho, String forwho, int amount, Date targetDate, String description) {
-		super();
-		
-		this.fromwho = fromwho;
-		this.forwho = forwho;
-		this.amount = amount;
-		this.targetDate = targetDate;
-		this.description = description;
-	}
-	
-
-
-	
-
-	
-	
-	
 	
 }

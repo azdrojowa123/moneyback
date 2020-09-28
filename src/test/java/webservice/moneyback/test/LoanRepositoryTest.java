@@ -16,7 +16,7 @@ import webservice.moneyback.dao.LoanRepository;
 
 
 @DataJpaTest
-public class LoanRepositoryTestNew {
+public class LoanRepositoryTest {
 		
 	@Autowired
 	private LoanRepository repo;

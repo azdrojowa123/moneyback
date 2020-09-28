@@ -38,10 +38,12 @@ class LoanServiceTestMock {
 				Arrays.asList(new Loan(1,"Ola","Kamil",130,new Date(),"description")
 				));
 		
-				
-		List<Loan> result = service.findByPerson("Kamil");
 		
+		List<Loan> result = service.findByPerson("Kamil");
 		assertThat(result.get(0).getForwho()).isEqualTo("Kamil");
+		
+		List allValues = captor.getAllValues();
+		assertEquals(List.of("Kamil"),allValues);
 		
 		
 	}

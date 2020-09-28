@@ -32,9 +32,10 @@ class LoanServiceTestMock {
 	@Test
 	void findByPerson_test() {
 		
-		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		//@Captor ArgumentCaptor<String> captorS;
+		ArgumentCaptor<String> captorS = ArgumentCaptor.forClass(String.class);
 		
-		when(repo.findByPerson(captor.capture())).thenReturn(
+		when(repo.findByPerson(captorS.capture())).thenReturn(
 				Arrays.asList(new Loan(1,"Ola","Kamil",130,new Date(),"description")
 				));
 		
@@ -42,7 +43,7 @@ class LoanServiceTestMock {
 		List<Loan> result = service.findByPerson("Kamil");
 		assertThat(result.get(0).getForwho()).isEqualTo("Kamil");
 		
-		List allValues = captor.getAllValues();
+		List allValues = captorS.getAllValues();
 		assertEquals(List.of("Kamil"),allValues);
 		
 		
